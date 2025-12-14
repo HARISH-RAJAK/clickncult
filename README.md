@@ -1,73 +1,39 @@
-# Welcome to your Lovable project
+# 🛑🛑🛑 WARNING! 🛑🛑🛑
 
-## Project info
+## ☠️ **ACCESS DENIED** ☠️
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+This software and its source code are the exclusive property of **clickncult**.
 
-## How can I edit this code?
+**Unauthorized use, copying, distribution, or modification of this software, in whole or in part, is strictly prohibited.**
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+### 🚨 **LEGAL NOTICE** 🚨
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+This repository is private and confidential. Any attempt to download, clone, fork, or otherwise replicate this codebase is a violation of international copyright and intellectual property laws.
 
-Changes made via Lovable will be committed automatically to this repo.
+**Offenders will be prosecuted to the fullest extent of the law.**
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### ⚠️ **TRESPASSING ON DIGITAL PROPERTY** ⚠️
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+You have entered a restricted area. Your activities are being monitored. If you are not an authorized employee of **clickncult**, you must leave immediately.
 
-Follow these steps:
+**Failure to comply will have severe legal consequences, including, but not limited to:**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+*   Criminal charges
+*   Civil lawsuits for damages
+*   Permanent blacklisting from our services
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+### **FOR AUTHORIZED PERSONNEL ONLY**
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+If you are an authorized member of the **clickncult** team, please proceed with caution. Ensure you are following all security protocols and company policies.
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## **IF YOU ARE NOT AUTHORIZED, DISCONNECT IMMEDIATELY.**
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# **YOU HAVE BEEN WARNED.**
