@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { Menu, X, Scissors } from "lucide-react";
+import { Menu, X, Scissors, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const navLinks = [
@@ -12,14 +12,13 @@ const navLinks = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isAboutInView, setIsAboutInView] = useState(false);
   
   const { scrollY } = useScroll();
   const navY = useTransform(scrollY, [0, 100], [0, -10]);
   const navScale = useTransform(scrollY, [0, 100], [1, 0.98]);
   const navRotateX = useTransform(scrollY, [0, 100], [0, 2]);
   
-  // Mouse tracking for 3D tilt
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   
@@ -27,10 +26,23 @@ const Navbar = () => {
   const rotateY = useSpring(useTransform(mouseX, [-500, 500], [-5, 5]), { stiffness: 300, damping: 30 });
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const aboutSection = document.querySelector("#about");
+    if (!aboutSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsAboutInView(entry.isIntersecting);
+      },
+      { threshold: 0.5 } 
+    );
+
+    observer.observe(aboutSection);
+
+    return () => {
+      observer.unobserve(aboutSection);
+    };
   }, []);
+
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -58,21 +70,15 @@ const Navbar = () => {
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`fixed top-4 left-4 right-4 z-50 rounded-2xl transition-all duration-500 ${
-        isScrolled 
-          ? "bg-card/90 backdrop-blur-xl shadow-lg shadow-primary/5 border border-border" 
-          : "bg-card/60 backdrop-blur-lg border border-border/50"
-      }`}
-    >
+      className={`fixed top-4 left-4 right-4 z-50 rounded-full transition-all duration-500 shadow-lg shadow-primary/5 border border-border ${isAboutInView ? 'bg-gradient-dark' : 'bg-gradient-hero'}`}>
       <motion.div 
         className="container mx-auto px-6 py-4"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       >
         <div className="flex items-center justify-between">
-          {/* Logo with 3D effect */}
           <motion.a
             href="#home"
-            className="font-display text-2xl font-bold relative group"
+            className="font-display text-3xl font-bold relative group"
             whileHover={{ scale: 1.05, rotateY: 10 }}
             whileTap={{ scale: 0.95 }}
             style={{ transformStyle: "preserve-3d" }}
@@ -81,24 +87,23 @@ const Navbar = () => {
               className="relative inline-flex items-center gap-1"
               style={{ transform: "translateZ(20px)" }}
             >
-              <span className="text-gradient">Click</span>
+              <span className="text-gradient ">Click</span>
               <motion.span 
-                className="text-accent mx-1"
+                className="text-gradient mx-1"
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
                 n
               </motion.span>
-              <span className="text-gradient">Cut</span>
+              <span className="text-gradient">Cult</span>
               <motion.div
                 className="ml-1"
                 animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.1, 1] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Scissors className="w-5 h-5 text-accent" />
+                <Scissors className="w-6 h-6 text-accent" />
               </motion.div>
             </motion.span>
-            {/* 3D shadow layer */}
             <span 
               className="absolute inset-0 text-primary/20 blur-sm"
               style={{ transform: "translateZ(-10px) translateY(2px)" }}
@@ -107,13 +112,12 @@ const Navbar = () => {
             </span>
           </motion.a>
 
-          {/* Desktop Navigation with 3D hover */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden font-body md:flex items-center gap-4 font-semibold text-base">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors group"
+                className={`relative px-4 py-2 hover:text-foreground transition-colors group ${isAboutInView ? 'text-white font-bold' : 'text-muted-foreground'}`}
                 initial={{ opacity: 0, y: -20, rotateX: -30 }}
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
@@ -125,12 +129,10 @@ const Navbar = () => {
                 style={{ transformStyle: "preserve-3d", transformPerspective: 500 }}
               >
                 <span className="relative z-10">{link.name}</span>
-                {/* Glow background on hover */}
                 <motion.span 
-                  className="absolute inset-0 rounded-xl bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute inset-0 rounded-xl bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity group-hover:backdrop-blur-sm"
                   style={{ transform: "translateZ(-5px)" }}
                 />
-                {/* Underline with 3D effect */}
                 <motion.span 
                   className="absolute -bottom-0 left-2 right-2 h-0.5 bg-gradient-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
                   style={{ transform: "translateZ(5px)" }}
@@ -138,22 +140,34 @@ const Navbar = () => {
               </motion.a>
             ))}
             
-            {/* CTA Button with 3D effect */}
-            <motion.button
+            <motion.a href="https://www.instagram.com/clickncult/" target="_blank" rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
               animate={{ opacity: 1, scale: 1, rotateY: 0 }}
               transition={{ delay: 0.8 }}
               whileHover={{ 
-                scale: 1.1, 
-                rotateY: 10,
+                scale: 1.2, 
+                rotateY: 15,
+                color: "hsl(var(--primary))",
+              }}
+              whileTap={{ scale: 0.9 }}
+              className="p-2.5 bg-gradient-soft rounded-full text-foreground"
+            >
+              <Instagram size={22} />
+            </motion.a>
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8, rotateY: 30 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              transition={{ delay: 0.9 }}
+              whileHover={{ 
+                scale: 1.05, 
+                rotateY: -10,
                 boxShadow: "0 20px 40px -10px hsl(var(--primary) / 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="ml-4 px-6 py-2.5 bg-gradient-primary text-primary-foreground font-semibold rounded-full relative overflow-hidden group"
+              className="px-6 py-3 bg-gradient-primary text-primary-foreground font-bold text-base rounded-full relative overflow-hidden group"
               style={{ transformStyle: "preserve-3d", transformPerspective: 500 }}
             >
               <span className="relative z-10">Get Started</span>
-              {/* Shimmer effect */}
               <motion.span 
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                 animate={{ x: ["-100%", "100%"] }}
@@ -162,7 +176,6 @@ const Navbar = () => {
             </motion.button>
           </div>
 
-          {/* Mobile Menu Toggle with 3D flip */}
           <motion.button
             className="md:hidden text-foreground p-2 rounded-xl bg-secondary"
             onClick={() => setIsOpen(!isOpen)}
@@ -179,7 +192,6 @@ const Navbar = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Navigation with 3D entrance */}
         <motion.div
           initial={false}
           animate={{ 
@@ -191,7 +203,7 @@ const Navbar = () => {
           className="md:hidden overflow-hidden"
           style={{ transformOrigin: "top", transformPerspective: 1000 }}
         >
-          <div className="py-4 flex flex-col gap-2">
+          <div className="py-4 flex flex-col gap-2 font-semibold text-base">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -206,13 +218,22 @@ const Navbar = () => {
                 {link.name}
               </motion.a>
             ))}
-            <motion.button 
-              className="mt-2 px-6 py-3 bg-gradient-primary text-primary-foreground font-semibold rounded-xl w-full"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get Started
-            </motion.button>
+            <div className="flex items-center gap-4 mt-2">
+              <motion.a href="https://www.instagram.com/clickncult/" target="_blank" rel="noopener noreferrer"
+                className="p-3 bg-gradient-soft rounded-xl text-foreground"
+                whileHover={{ scale: 1.05, color: "hsl(var(--primary))" }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Instagram size={24} />
+              </motion.a>
+              <motion.button 
+                className="flex-1 px-6 py-3 bg-gradient-primary text-primary-foreground font-bold text-base rounded-xl"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Get Started
+              </motion.button>
+            </div>
           </div>
         </motion.div>
       </motion.div>

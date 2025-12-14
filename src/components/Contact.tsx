@@ -7,7 +7,7 @@ const Contact = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden" ref={ref}>
+    <section id="contact" className="py-32 relative overflow-hidden rounded-3xl m-4 shadow-lg" ref={ref}>
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-hero" />
       <motion.div

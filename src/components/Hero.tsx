@@ -17,14 +17,14 @@ const Hero = () => {
     <section
       ref={containerRef}
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden rounded-3xl m-4 shadow-lg"
     >
       {/* Soft Background Blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle, hsl(262 83% 58% / 0.12), transparent 70%)",
+            background: "radial-gradient(circle, hsl(217 91% 60% / 0.12), transparent 70%)",
           }}
           animate={{
             scale: [1, 1.1, 1],
@@ -36,7 +36,7 @@ const Hero = () => {
         <motion.div
           className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full"
           style={{
-            background: "radial-gradient(circle, hsl(326 78% 60% / 0.1), transparent 70%)",
+            background: "radial-gradient(circle, hsl(210 89% 79% / 0.1), transparent 70%)",
           }}
           animate={{
             scale: [1.1, 1, 1.1],
@@ -48,7 +48,7 @@ const Hero = () => {
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
           style={{
-            background: "radial-gradient(circle, hsl(262 83% 58% / 0.05), transparent 60%)",
+            background: "radial-gradient(circle, hsl(217 91% 60% / 0.05), transparent 60%)",
           }}
           animate={{ scale: [1, 1.15, 1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
@@ -130,7 +130,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 text-foreground"
           >
-            We Help{" "}
+            <span className="text-gradient">We Help</span>{" "}
             <span className="text-gradient">Small Business</span>
             <br />
             <motion.span
@@ -138,7 +138,7 @@ const Hero = () => {
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              Grow <span className="text-gradient-accent">Big</span>
+              <span className="text-gradient-growth">Grow</span> <span className="text-gradient-accent">Big</span>
             </motion.span>
           </motion.h1>
 

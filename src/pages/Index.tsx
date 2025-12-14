@@ -6,36 +6,27 @@ import Stats from "@/components/Stats";
 import Clients from "@/components/Clients";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Section3D from "@/components/Section3D";
+import { VideoReel } from "@/components/VideoReel";
+import Companies from "@/components/Companies";
 
 const Index = () => {
   return (
-    <main className="relative overflow-x-hidden" style={{ perspective: "1200px" }}>
+    <main className="relative overflow-x-hidden bg-transparent">
+      <VideoReel />
       <Navbar />
       
-      <Section3D direction="up">
-        <Hero />
-      </Section3D>
+      <Hero />
       
-      <Section3D direction="right">
-        <Services />
-      </Section3D>
+      <Services />
       
-      <Section3D direction="left">
-        <About />
-      </Section3D>
+      <About />
       
-      <Section3D direction="up">
-        <Stats />
-      </Section3D>
+      <Stats />
+     
       
-      <Section3D direction="right">
-        <Clients />
-      </Section3D>
-      
-      <Section3D direction="left">
-        <Contact />
-      </Section3D>
+      <Contact />
+
+      <Companies />
       
       <Footer />
     </main>
